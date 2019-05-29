@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from '../homePage/home.js'
-import Login from './Login.js'
+import Login from './login.js'
 import fire from './fire.js';
 
 class SignupPage extends Component{
