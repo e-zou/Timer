@@ -1,17 +1,19 @@
 import React, { Components } from 'react';
-import moment from "moment";
+import TimerCircle from './TimerCircle.js';
+import './Timer.css';
 
 export default class Timer extends React.Component {
     state = {
         // unused variables
         timeStarted: false,
         timeStopped: true,
+
         // hidden variables
         totalSeconds: 1500, // total time elapsed in seconds
-        timer: 0, // used to set and clear intervals
-        // time variables
+        timer: 0, // function used to set and clear intervals
         minutes : 25,
         seconds : 0,
+
         // displayed variables
         minutes1 : '25',
         seconds1 : '00'
@@ -40,23 +42,20 @@ export default class Timer extends React.Component {
 
     startTimer = (e) => { // start timer
         e.preventDefault();
-        console.log(this.state.timer);
-        console.log(this.state.totalSeconds);
-        if(this.state.totalSeconds > 0) {
+        if(this.state.totalSeconds > 0 && this.state.timer == 0) { // timer == 0 only happens the first time we click start timer
             this.state.timer = setInterval(this.tick, 1000); // timer is a function used to set variables every 1 second
         }
-        console.log("Timer countdown");
+        console.log("start timer");
     }
 
     stopTimer = (e) => { // stops timer
         e.preventDefault();
         clearInterval(this.state.timer); // stops the timer function from running
-        console.log("Timer stop");
-        // console.log(this.state.minutes1);
-        // console.log(this.state.seconds1);
+        console.log("stop timer");
         this.setState({
             timeStarted: true,
             timeStopped: false,
+            timer: 0, // set timer to zero
         });
     }
 
@@ -73,18 +72,22 @@ export default class Timer extends React.Component {
             minutes1 : '25',
             seconds1 : '00'
         });
-        console.log("Timer reset");
+        console.log("reset timer");
     }
 
     render() {
         return (
           <div>
-              {/* <div>Total Seconds: {this.state.totalSeconds} </div> */}
-              <div className="timeDisplay">{this.state.minutes1} : {this.state.seconds1}</div>
+              
+              <div className="timeDisplay">
+                <TimerCircle circumference={this.state.totalSeconds} />
+                <p className="timerNumbers">{this.state.minutes1} : {this.state.seconds1}</p>
+              </div>
               <button onClick={this.startTimer}> Start</button>
               <button onClick={this.stopTimer}> Stop</button>
               <button onClick={this.resetTimer}> Reset</button>
           </div>
         );
-      }
+    }
+
 }
