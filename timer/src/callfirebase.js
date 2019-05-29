@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import firebase from './firebase.js';
+import firebase from './fire.js';
 import Taskpage from './taskpage';
 
 export default class Tasks extends Component{
