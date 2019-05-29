@@ -12,10 +12,9 @@ export default class Tasks extends Component{
             time:"",
             array:[]
         }
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(){
+    handleClick = (e) => {
         var ref = firebase.database().ref('tasks');
         const user = {
             tasks: this.state.tasks,
@@ -46,30 +45,26 @@ export default class Tasks extends Component{
         })
     }
 
+    updateField (field, newValue) { // on change, update value
+        this.setState({
+            ...this.state,
+            [field]: newValue
+        });
+    }
+
     render(){
         return(
             <div>
-                <label for="date">Date: </label>
-                <input value = {this.state.date} type="date"
-                onChange = {e => this.setState({date: e.target.value})}/> <br/>
-                
-                <label for="time">Time: </label>
-                <input value = {this.state.time} type="time"
-                onChange = {e => this.setState({time: e.target.value})}/><br/>
-
-                <label for="tasks done">Enter tasks: </label>
-                <input value = {this.state.tasks}
-                onChange = {e => this.setState({tasks: e.target.value})}/><br/>
-
-                <button onClick={this.handleClick}>Log tasks!</button>
-
-                {this.state.array.map(x=>
-                    <li key={x.id}>
-                        Date: {x.date} <br/>
-                        Time: {x.time} <br/>
-                        Tasks: {x.tasks} <br/>
-                    </li>)}
-                {/*<Taskpage tasks={this.state.tasks}/>*/}
+                <Taskpage date={this.state.data} 
+                tasks={this.state.date} 
+                time={this.state.time} 
+                array={this.state.array}
+                handleClick={this.handleClick}
+                updateTasks={newValue => this.updateField("tasks", newValue)}
+                updateDate={newValue => this.updateField("date", newValue)}
+                updateTime={newValue => this.updateField("time", newValue)}
+                updateArray={newValue => this.updateField("array", newValue)}
+                />
             </div>
         )
     }
