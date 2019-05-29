@@ -1,13 +1,17 @@
-.timer {
+  .timer {
+      margin-top: 200px;
+    }
+
+  .timerTypes {
     margin-top: 200px;
   }
+  
   .timerCircle {
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
     height: 200px;
-    margin-top: 200px;
   }
   .countdown-svg {
     display: flex;
@@ -28,8 +32,9 @@
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 33%;
-    left: 47.5%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     font-family: lato;
     font-size: 30px;
   }

@@ -36,23 +36,23 @@ function describeArc(x, y, radius, startAngle, endAngle) {
 
 export default class TimerCircle extends React.Component {
     render() {
-        const radius = this.props.circumference * 0.24; // each second (1500) is .24 of a degree in a circle (360)
+        const radius = this.props.circumference * (360 / this.props.initialSeconds); // each second (1500) is .24 of a degree in a circle (360)
         return (
           <div className="timerCircle" id="countdown-svg">
-                <svg className="countdown-svg">
-                    <path
+                <svg className="countdown-svg" preserveAspectRatio="xMidYMid meet">
+                    <path className="path1"
                         fill="none"
                         stroke="#6A7E99"
                         strokeWidth="5"
                         // starts at .00001 to show tiny bar
-                        d={describeArc(152, 80, 70, 0.00001, 360)} 
+                        d={describeArc(150, 97, 70, 0.00001, 360)} // background
                     />
                     <path className="path2"
                         fill="none"
                         stroke="#F4F1F4"
                         strokeWidth="6"
                         // starts at .00001 to show tiny bar
-                        d={describeArc(152, 80, 70, 0.00001, radius)} 
+                        d={describeArc(150, 97, 70, 0.00001, radius)} // progress bar
                     />
                 </svg>
           </div>

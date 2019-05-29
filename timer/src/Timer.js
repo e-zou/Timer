@@ -10,13 +10,19 @@ export default class Timer extends React.Component {
 
         // hidden variables
         totalSeconds: 1500, // total time elapsed in seconds
+        initialSeconds: 1500, // to calculate svg circle proportion
         timer: 0, // function used to set and clear intervals
         minutes : 25,
         seconds : 0,
 
         // displayed variables
-        minutes1 : '25',
-        seconds1 : '00'
+        minDisplay : '25',
+        secDisplay : '00',
+
+        // timer types
+        shortBreakTimer : false,
+        longBreakTimer : false,
+        workTimer : true,
     }
 
     formatTime = (seconds) => { // converts into proper minutes and seconds
@@ -25,8 +31,8 @@ export default class Timer extends React.Component {
         this.setState({
             minutes : min,
             seconds : sec,
-            minutes1 : ("0" + min).slice(-2),
-            seconds1 : ("0" + sec).slice(-2),
+            minDisplay : ("0" + min).slice(-2),
+            secDisplay : ("0" + sec).slice(-2),
         })
     }
 
@@ -59,33 +65,130 @@ export default class Timer extends React.Component {
         });
     }
 
+    timerType = () => {
+        if (this.state.workTimer == true) { // 25 min work timer
+            this.setState({ // resets to the default state
+                totalSeconds: 1500,
+                initialSeconds: 1500,
+                minutes : 25,
+                seconds : 0,
+                minDisplay : '25',
+                secDisplay : '00'
+            });
+        }
+        if (this.state.shortBreakTimer == true) { // 5 min break timer
+            this.setState({
+                totalSeconds: 300,
+                initialSeconds: 300,
+                timer: 0,
+                minutes : 5,
+                seconds : 0,
+                minDisplay : '05',
+                secDisplay : '00',
+            })
+        }
+        if (this.state.longBreakTimer == true) { // 10 min break timer
+            this.setState({
+                totalSeconds: 600,
+                initialSeconds: 600,
+                timer: 0,
+                minutes : 10,
+                seconds : 0,
+                minDisplay : '10',
+                secDisplay : '00',
+            })
+        }
+    }
+
     resetTimer = (e) => { // resets timer
         e.preventDefault();
         clearInterval(this.state.timer); // stops timer function
         this.setState({ // resets to the default state
             timeStarted: false,
             timeStopped: true,
+            timer: 0,
+        });
+        this.timerType();
+        console.log("reset timer");
+    }
+
+    fiveMinTimer = (e) => {
+        e.preventDefault();
+        clearInterval(this.state.timer);
+        this.setState({ // resets to the default state
+            timeStarted: false,
+            timeStopped: true,
+            totalSeconds: 300,
+            initialSeconds: 300,
+            timer: 0,
+            minutes : 5,
+            seconds : 0,
+            minDisplay : '05',
+            secDisplay : '00',
+            shortBreakTimer : true,
+            longBreakTimer : false,
+            workTimer : false,
+        });
+    }
+
+    tenMinTimer = (e) => {
+        e.preventDefault();
+        clearInterval(this.state.timer);
+        this.setState({ // resets to the default state
+            timeStarted: false,
+            timeStopped: true,
+            totalSeconds: 600,
+            initialSeconds: 600,
+            timer: 0,
+            minutes : 10,
+            seconds : 0,
+            minDisplay : '10',
+            secDisplay : '00',
+            shortBreakTimer : false,
+            longBreakTimer : true,
+            workTimer : false,
+        });
+    }
+
+    workTimer = (e) => {
+        e.preventDefault();
+        clearInterval(this.state.timer);
+        this.setState({ // resets to the default state
+            timeStarted: false,
+            timeStopped: true,
             totalSeconds: 1500,
+            initialSeconds: 1500,
             timer: 0,
             minutes : 25,
             seconds : 0,
-            minutes1 : '25',
-            seconds1 : '00'
+            minDisplay : '25',
+            secDisplay : '00',
+            shortBreakTimer : false,
+            longBreakTimer : false,
+            workTimer : true,
         });
-        console.log("reset timer");
     }
 
     render() {
         return (
           <div>
+            <div className="timerTypes">
+                <button onClick={this.workTimer}> Work </button>
+                <button onClick={this.fiveMinTimer}> Short Break </button>
+                <button onClick={this.tenMinTimer}> Long Break</button>
+            </div>
+
+            <div className="timeDisplay">
+                <TimerCircle circumference={this.state.totalSeconds} initialSeconds={this.state.initialSeconds}/>
+                <div className="timerNumbers">{this.state.minDisplay} : {this.state.secDisplay}</div>
+            </div>
               
-              <div className="timeDisplay">
-                <TimerCircle circumference={this.state.totalSeconds} />
-                <p className="timerNumbers">{this.state.minutes1} : {this.state.seconds1}</p>
-              </div>
-              <button onClick={this.startTimer}> Start</button>
-              <button onClick={this.stopTimer}> Stop</button>
-              <button onClick={this.resetTimer}> Reset</button>
+            <div className="timerButtons">
+                <button onClick={this.startTimer}> Start</button>
+                <button onClick={this.stopTimer}> Stop</button>
+                <button onClick={this.resetTimer}> Reset</button>
+            </div>
+
           </div>
         );
     }
