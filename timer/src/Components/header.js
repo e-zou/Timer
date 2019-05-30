@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import Logout from './homePage/Logout.js';
  
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -52,8 +53,10 @@ export default class Header extends React.Component {
                   Tomato Time
                 </Typography> 
                 <Button edge = "start"  component={HomeLink}> <HomeIcon /> Home</Button>
-                <Button edge = "start" component={LoginLink}>Login</Button>
                 <Button edge = "start"  component={ProfileLink}>Profile</Button>
+                <Button edge = "start" component={LoginLink}>Login</Button>
+                {/* Logout Button below */}
+                <Logout/> 
               </Toolbar>
             </AppBar>
             </MuiThemeProvider>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Timer from './Timer.js';
-import Home2 from './Home2.js';
 import TaskList from './TaskList.js';
 import HasUserSet from './../loginPage/HasUserSet.js';
 
@@ -22,7 +21,6 @@ export default class Profile extends React.Component {
         <Box >
               <Timer />
               <TaskList user={this.state.user}/>
-              <Home2 />
         </Box>
         </MuiThemeProvider>
         </div>

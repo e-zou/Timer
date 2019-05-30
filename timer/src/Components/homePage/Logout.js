@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import fire from '../loginPage/fire'
+import Button from '@material-ui/core/Button';
 
-class Home2 extends Component{
+class Logout extends Component{
     constructor(props){
         super(props);
         this.logout=this.logout.bind(this);
@@ -14,9 +15,9 @@ class Home2 extends Component{
     render(){
         return(
             <div>
-                <button onClick={this.logout}>Logout</button>
+                <Button onClick={this.logout}>Logout</Button>
             </div>
         )
     }
 }
-export default Home2;
+export default Logout;
