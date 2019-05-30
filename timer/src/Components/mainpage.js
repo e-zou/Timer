@@ -5,7 +5,6 @@ import Home from './homePage/home.js';
 import SignupPage from './loginPage/SignupPage.js';
 
 export default class MainPage extends React.Component {
-
     render () {
         return (
         <main>

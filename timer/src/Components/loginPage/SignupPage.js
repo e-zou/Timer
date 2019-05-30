@@ -4,6 +4,7 @@ import Home from '../homePage/home.js'
 import Login from './Login.js'
 import fire from './fire.js';
 
+
 class SignupPage extends Component{
 
     constructor(props){
@@ -19,7 +20,7 @@ class SignupPage extends Component{
   
     authListener(){
       fire.auth().onAuthStateChanged((user)=>{
-       // console.log(user)
+      //  console.log(user)
         if(user){
           this.setState({user});
       //    localStorage.setItem('user',user.uid);
@@ -31,9 +32,10 @@ class SignupPage extends Component{
     }
     
     render(){
+      // console.log(this.state.user);
       return(
-        <div className="App">
-      {this.state.user ? (<Home/>) : (<Login/>)} {/*//if there is user, render home, otherwise push to login*/}
+        <div className="Routing">
+        {this.state.user ? (<Home user={this.state.user}/>) : (<Login/>)} {/*//if there is user, render home, otherwise push to login*/}
         </div>
       )
     }
