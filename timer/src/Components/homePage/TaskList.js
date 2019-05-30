@@ -13,17 +13,18 @@ export default class TaskList extends React.Component {
         adddate: "",
         addcheck: "",
 
-        // organizes data
+        // user-facing (organizes data)
         tasks: [], // {task: "", time: "", date: ""}
         times: [],
         dates: [],
 
-        // copies to store hidden dates 
+        // admin-facing (copies to store hidden dates)
         times1: [],
-        dates1: [],
+
+        // checks 
         checks: [],
 
-        // detects for checks
+        // detects for any checks
         checked: false,
 
         // array to send to firebase
@@ -98,27 +99,6 @@ export default class TaskList extends React.Component {
         }
     }
 
-    // Update specific time in time list
-    updateDate = (index) => {
-        // this.updateChecked(); // switches whether the box is checked or not
-        let ind = index.index
-
-        if (this.state.checks[ind] == false) {
-            let updatedDateArr = this.state.dates
-            updatedDateArr[ind] = this.getDate();
-            this.setState({
-                dates : updatedDateArr
-            })
-        } else {
-            let updatedDateArr = this.state.dates
-            updatedDateArr[ind] = this.state.dates1[index.index];
-            this.setState({
-                dates : updatedDateArr
-            })
-        }
-    }
-    
-
    // updateField 
    updateField (field, newValue) {
     let today = new Date();
@@ -153,12 +133,10 @@ export default class TaskList extends React.Component {
         newTimes1.push(this.state.addtime);
 
         let newDates = this.state.dates
-        let newDates1 = this.state.dates1
         this.setState({
             adddate : this.getDate
         })
-        newDates.push("");
-        newDates1.push(this.state.adddate);
+        newDates.push(this.state.adddate);
 
         let newChecks = this.state.checks
         newChecks.push(false);
@@ -168,7 +146,6 @@ export default class TaskList extends React.Component {
             times : newTimes,
             dates: newDates,
             times1: newTimes1,
-            dates1: newDates1,
             checks : newChecks
         })
     }
@@ -223,15 +200,18 @@ export default class TaskList extends React.Component {
         })
     }
 
-            
-        // if user is not null, put in a button with a function that will send in data.
-        // else do nothing
 
-
-    hasUser = () => {
-        if (this.state.user != null) {
+    hasUser = (e) => {
+        e.preventDefault();
+        if (this.state.user != null) { // haven't been logged in
             console.log("there is a user");
-        } else {
+        } else { // assumed has been logged in 
+            
+            // at index checks is true, get data about date, time, and task at that index
+            // put them all in seperate arrays
+
+            // merge arrays task : {date: , time: }
+            // 
             console.log("no one");
         }
     }
@@ -240,15 +220,11 @@ export default class TaskList extends React.Component {
     render () {
         // console.log(this.state.user);
 
-        console.log(this.state.tasks);
-        console.log(this.state.dates);
-        console.log(this.state.times);
-        console.log(this.state.checks);
-
-        console.log(this.state.dates1);
-        console.log(this.state.times1);
-
-
+        // console.log(this.state.tasks);
+        // console.log(this.state.dates);
+        // console.log(this.state.times);
+        // console.log(this.state.checks);
+        // console.log(this.state.times1);
 
         return (
         
@@ -270,7 +246,7 @@ export default class TaskList extends React.Component {
                         <td><input type="checkbox" key={index} onChange={e => {
                             this.updateCheck({index})
                             this.updateTime({index}) // update specific time in time list
-                            this.updateDate({index}) // update specific date in date list
+                            // this.updateDate({index}) // update specific date in date list
                         }}/></td>
                         <td><button key={index} className="deleteTask" onClick={e => {
                             this.deleteTask({index})
@@ -283,7 +259,12 @@ export default class TaskList extends React.Component {
                 })}
                 </tbody>
             </table>
-            <SendDataButton onClick={this.hasUser}/>
+            <SendDataButton
+            user={this.state.user}
+            tasks={this.state.tasks} 
+            times={this.state.times} 
+            dates={this.state.dates}
+            />
         </div>
            
         );
