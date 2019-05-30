@@ -6,16 +6,28 @@ export default class TaskList extends React.Component {
     // dummy values in state that will be passed in from callfirebase.js
     state = { 
         user: this.props.user, // passed in from home.js 
-        addtask: "",
-        tasks: ["brush teeth", "do homework", "figure out firebase"], // {task: "", time: "", date: ""}
-        times: ["10:00", "2:00", "5:00"],
-        dates: ["01-01-2020", "09-05-2019", "09-06-2019"],
-        checks: [],
 
-        checked: false,
+        // adding values into arrays
+        addtask: "",
         addtime: "",
         adddate: "",
-        dataToSend: {task:"", time:"", date:""}
+        addcheck: "",
+
+        // organizes data
+        tasks: [], // {task: "", time: "", date: ""}
+        times: [],
+        dates: [],
+
+        // copies to store hidden dates 
+        times1: [],
+        dates1: [],
+        checks: [],
+
+        // detects for checks
+        checked: false,
+
+        // array to send to firebase
+        dataToSend: []
     }
 
     // Get Date 
@@ -47,37 +59,39 @@ export default class TaskList extends React.Component {
             return ""
         }
     }
+
+    getTime2 = () => {
+        let today = new Date();
+        // Time
+        let hours = String(today.getHours()).padStart(2, '0');
+        let mins = String(today.getMinutes()).padStart(2, '0');
+
+        let time = hours + ':' + mins;
+        return time
+    }
+
     
     // Update Checked
-    updateChecked = () => {
-        if (this.state.checked == false) {
-            this.setState({
-                checked : false
-            })
-        } else {
-            this.setState({
-                checked : true
-            })
-        }
+    updateCheck = (index) => {
+        let updateCheckArr = this.state.checks;
+        updateCheckArr[index.index] == true ? updateCheckArr[index.index] = false : updateCheckArr[index.index] = true
+        this.setState({
+            checks : updateCheckArr
+        })
+
     }
 
     // Update specific time in time list
-    updateTime = (index) => {
-        this.updateChecked(); // switches whether the box is checked or not
-
-        if (this.state.checked == true) { // if it's true, set the current time at position (aka only update completed tasks)
+    updateTime = (index) => { 
+        if (this.state.checks[index.index] == false) { // if it's true, set the current time at position (aka only update completed tasks)
             let updatedTimeArr = this.state.times
-            for (let i = 0; i < updatedTimeArr.length; i++) {
-                updatedTimeArr[i] = this.getTime();
-            }
+            updatedTimeArr[index.index] = this.getTime();
             this.setState({
                 times : updatedTimeArr
             })
         } else { // if false, set current time to send nothing
             let updatedTimeArr = this.state.times
-            for (let i = 0; i < updatedTimeArr.length; i++) {
-                updatedTimeArr[i] = "";
-            }
+            updatedTimeArr[index.index] = this.state.times1[index.index];
             this.setState({
                 times : updatedTimeArr
             })
@@ -86,24 +100,20 @@ export default class TaskList extends React.Component {
 
     // Update specific time in time list
     updateDate = (index) => {
-        this.updateChecked(); // switches whether the box is checked or not
+        // this.updateChecked(); // switches whether the box is checked or not
         let ind = index.index
 
-        if (this.state.checked == true) {
+        if (this.state.checks[ind] == false) {
             let updatedDateArr = this.state.dates
-            for (let i = 0; i < updatedDateArr.length; i++) {
-                updatedDateArr[i] = this.getDate();
-            }
+            updatedDateArr[ind] = this.getDate();
             this.setState({
-                times : updatedDateArr
+                dates : updatedDateArr
             })
         } else {
             let updatedDateArr = this.state.dates
-            for (let i = 0; i < updatedDateArr.length; i++) {
-                updatedDateArr[i] = "";
-            }
+            updatedDateArr[ind] = this.state.dates1[index.index];
             this.setState({
-                times : updatedDateArr
+                dates : updatedDateArr
             })
         }
     }
@@ -111,9 +121,21 @@ export default class TaskList extends React.Component {
 
    // updateField 
    updateField (field, newValue) {
+    let today = new Date();
+    // Time
+    let hours = String(today.getHours()).padStart(2, '0');
+    let mins = String(today.getMinutes()).padStart(2, '0');
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    let date = mm + '-' + dd + '-' + yyyy;
+    let time = hours + ':' + mins;
        this.setState({
            ...this.state,
-           [field]: newValue
+           [field]: newValue,
+           addtime : time,
+           adddate : date,
        });
    }
     // onSubmit
@@ -123,45 +145,67 @@ export default class TaskList extends React.Component {
         newTaskList.push(this.state.addtask);
         
         let newTimes = this.state.times
-        newTimes.push(this.state.addtimes);
+        let newTimes1 = this.state.times1
+        this.setState({
+            addtime : this.getTime
+        })
+        newTimes.push("");
+        newTimes1.push(this.state.addtime);
 
         let newDates = this.state.dates
-        newDates.push(this.state.adddates);
+        let newDates1 = this.state.dates1
+        this.setState({
+            adddate : this.getDate
+        })
+        newDates.push("");
+        newDates1.push(this.state.adddate);
+
+        let newChecks = this.state.checks
+        newChecks.push(false);
 
         this.setState({
             tasks: newTaskList,
             times : newTimes,
             dates: newDates,
+            times1: newTimes1,
+            dates1: newDates1,
+            checks : newChecks
         })
     }
 
     // To-Do send data to database
 
     // delete tasks
-    deleteTask = (taskName) => {
+    deleteTask = (index) => {
         // console.log(taskName);
         let newTaskList = [...this.state.tasks];
 
-        for (let i = newTaskList.length-1; i>=0; i--) {
-            if (newTaskList[i] == taskName.task) {
-                newTaskList.splice(i, 1);
-            }
-        }
+        let i = index.index
+        newTaskList.splice(i, 1);
+
         this.setState({
             tasks : newTaskList
         })
     }
 
-    deleteDate = (index) => {
+    deleteCheck = (index) => {
+        // console.log(taskName);
         let ind = index.index;
 
-        let newDateList = [...this.state.dates];
+        let newCheckList = [...this.state.checks];
 
-        for (let i = newDateList.length-1; i>=0; i--) {
-            if (newDateList[i] == newDateList[ind]) {
-                newDateList.splice(i, 1);
-            }
-        }
+        newCheckList.splice(ind, 1);
+
+        this.setState({
+            checks : newCheckList
+        })
+    }
+
+    deleteDate = (index) => {
+        let i = index.index;
+
+        let newDateList = [...this.state.dates];
+        newDateList.splice(i, 1);
         this.setState({
             dates : newDateList
         })
@@ -169,17 +213,10 @@ export default class TaskList extends React.Component {
 
     deleteTime = (index) => {
         // console.log(index);
-        let ind = index.index;
+        let i = index.index;
         // console.log(ind);
         let newTimeList = [...this.state.times];
-        // console.log(newTimeList[1]);
-        for (let i = newTimeList.length-1; i>=0; i--) {
-            // console.log("time list item: " + newTimeList[i] + newTimeList[ind]);
-            if (newTimeList[i] == newTimeList[ind]) {
-                // console.log("there's a match")
-                newTimeList.splice(i, 1);
-            }
-        }
+        newTimeList.splice(i, 1);
         console.log(newTimeList);
         this.setState({
             times : newTimeList
@@ -208,8 +245,14 @@ export default class TaskList extends React.Component {
         console.log(this.state.times);
         console.log(this.state.checks);
 
+        console.log(this.state.dates1);
+        console.log(this.state.times1);
+
+
 
         return (
+        
+
         <div className="taskLog">
             <form onSubmit={this.onSubmit}>
                 <label>Log your task: </label>
@@ -225,13 +268,15 @@ export default class TaskList extends React.Component {
                     <tr className="taskRow">
                         <td>{task}</td>
                         <td><input type="checkbox" key={index} onChange={e => {
+                            this.updateCheck({index})
                             this.updateTime({index}) // update specific time in time list
                             this.updateDate({index}) // update specific date in date list
                         }}/></td>
                         <td><button key={index} className="deleteTask" onClick={e => {
-                            this.deleteTask({task})
+                            this.deleteTask({index})
                             this.deleteTime({index})
                             this.deleteDate({index})
+                            this.deleteCheck({index})
                         }}>X</button></td>
                     </tr>
                     );
