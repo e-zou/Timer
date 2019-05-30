@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import fire from './fire'
+import fire from './fire';
 
 class Login extends Component{
     constructor(props){

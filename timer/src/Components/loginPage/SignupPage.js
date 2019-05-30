@@ -4,6 +4,7 @@ import Home from '../homePage/home.js'
 import Login from './login.js'
 import fire from './fire.js';
 
+
 class SignupPage extends Component{
 
     constructor(props){
@@ -32,8 +33,8 @@ class SignupPage extends Component{
     
     render(){
       return(
-        <div className="App">
-      {this.state.user ? (<Home/>) : (<Login/>)} {/*//if there is user, render home, otherwise push to login*/}
+        <div className="Routing">
+        {this.state.user ? (<Home user={this.state.user}/>) : (<Login/>)} {/*//if there is user, render home, otherwise push to login*/}
         </div>
       )
     }
