@@ -2,6 +2,8 @@ import React, { Components } from 'react';
 import TimerCircle from './TimerCircle.js';
 import './Timer.css';
 
+import Button from '@material-ui/core/Button';
+
 export default class Timer extends React.Component {
     state = {
         // unused variables
@@ -173,9 +175,9 @@ export default class Timer extends React.Component {
         return (
           <div>
             <div className="timerTypes">
-                <button onClick={this.workTimer}> Work </button>
-                <button onClick={this.fiveMinTimer}> Short Break </button>
-                <button onClick={this.tenMinTimer}> Long Break</button>
+                <Button onClick={this.workTimer}>Work</Button>
+                <Button onClick={this.fiveMinTimer}>Short Break</Button>
+                <Button onClick={this.tenMinTimer}>Long Break</Button>
             </div>
 
             <div className="timeDisplay">
@@ -184,9 +186,9 @@ export default class Timer extends React.Component {
             </div>
               
             <div className="timerButtons">
-                <button onClick={this.startTimer}> Start</button>
-                <button onClick={this.stopTimer}> Stop</button>
-                <button onClick={this.resetTimer}> Reset</button>
+                <Button onClick={this.startTimer}>Start</Button>
+                <Button onClick={this.stopTimer}>Stop</Button>
+                <Button onClick={this.resetTimer}>Reset</Button>
             </div>
 
           </div>

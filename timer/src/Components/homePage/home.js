@@ -3,6 +3,10 @@ import Timer from './Timer.js';
 import Home2 from './Home2.js';
 import TaskList from './TaskList.js';
 
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from '../theme.js';
+import Box from '@material-ui/core/Box';
+
 export default class Profile extends React.Component {
 
 
@@ -10,10 +14,19 @@ export default class Profile extends React.Component {
         return (
         
         <div>
-             <header>Home Page!</header>
+        <MuiThemeProvider theme={theme}>
+        <Box >
+            <Box  justifyContent="center">
               <Timer />
+              </Box>
+              <Box  justifyContent="flex-end">
               <TaskList />
+              </Box>
+              <Box  justifyContent="flex-start">
               <Home2 />
+              </Box>
+        </Box>
+        </MuiThemeProvider>
         </div>
            
         );
