@@ -1,6 +1,6 @@
 import React from 'react';
 import SendDataButton from './SendDataButton.js';
-
+import Button from '@material-ui/core/Button';
 
 export default class TaskList extends React.Component {
     // dummy values in state that will be passed in from callfirebase.js
@@ -27,7 +27,7 @@ export default class TaskList extends React.Component {
         // detects for any checks
         checked: false,
 
-        // array to send to firebase
+        // checked arrays to send to firebase
         dataToSend: []
     }
 
@@ -235,7 +235,7 @@ export default class TaskList extends React.Component {
                 <input placeholder="task" onSubmit={this.onSubmit} onChange={e => {
                     this.updateField("addtask", e.target.value)
                 }} value={this.state.addtask}/>
-                <button onClick={this.onSubmit}>Log task</button>
+                <Button onClick={this.onSubmit}>Log task</Button>
             </form>
             <table className="taskList">
                 <tbody>
@@ -248,12 +248,12 @@ export default class TaskList extends React.Component {
                             this.updateTime({index}) // update specific time in time list
                             // this.updateDate({index}) // update specific date in date list
                         }}/></td>
-                        <td><button key={index} className="deleteTask" onClick={e => {
+                        <td><Button key={index} className="deleteTask" onClick={e => {
                             this.deleteTask({index})
                             this.deleteTime({index})
                             this.deleteDate({index})
                             this.deleteCheck({index})
-                        }}>X</button></td>
+                        }}>X</Button></td>
                     </tr>
                     );
                 })}

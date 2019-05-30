@@ -43,17 +43,18 @@ export default class TimerCircle extends React.Component {
                 <svg className="countdown-svg" preserveAspectRatio="xMidYMid meet">
                     <path className="path1"
                         fill="none"
-                        stroke="#6A7E99"
-                        strokeWidth="5"
+                        // stroke="#6A7E99" emily's default
+                        stroke="#519657"
+                        strokeWidth="29"
                         // starts at .00001 to show tiny bar
-                        d={describeArc(150, 97, 70, 0.00001, 360)} // background
+                        d={describeArc(225, 225, 150, 0.00001, 360)} // background
                     />
                     <path className="path2"
                         fill="none"
-                        stroke="#F4F1F4"
-                        strokeWidth="6"
+                        stroke="#F4F1F4" 
+                        strokeWidth="30"
                         // starts at .00001 to show tiny bar
-                        d={describeArc(150, 97, 70, 0.00001, radius)} // progress bar
+                        d={describeArc(225, 225, 150, 0.00001, radius)} // progress bar
                     />
                 </svg>
           </div>

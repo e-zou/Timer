@@ -173,11 +173,11 @@ export default class Timer extends React.Component {
 
     render() {
         return (
-          <div>
+          <div className="timer">
             <div className="timerTypes">
-                <Button onClick={this.workTimer}>Work</Button>
-                <Button onClick={this.fiveMinTimer}>Short Break</Button>
-                <Button onClick={this.tenMinTimer}>Long Break</Button>
+                <Button variant="outlined" onClick={this.workTimer}>Work</Button>
+                <Button variant="outlined" onClick={this.fiveMinTimer}>Short Break</Button>
+                <Button variant="outlined" onClick={this.tenMinTimer}>Long Break</Button>
             </div>
 
             <div className="timeDisplay">
@@ -186,9 +186,9 @@ export default class Timer extends React.Component {
             </div>
               
             <div className="timerButtons">
-                <Button onClick={this.startTimer}>Start</Button>
-                <Button onClick={this.stopTimer}>Stop</Button>
-                <Button onClick={this.resetTimer}>Reset</Button>
+                <Button onClick={this.startTimer}><i class="material-icons">play_arrow</i></Button>
+                <Button onClick={this.stopTimer}><i class="material-icons">stop</i></Button>
+                <Button onClick={this.resetTimer}><i class="material-icons">replay</i></Button>
             </div>
 
           </div>

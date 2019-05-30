@@ -20,16 +20,9 @@ export default class Profile extends React.Component {
         <div>
         <MuiThemeProvider theme={theme}>
         <Box >
-            <Box  justifyContent="center">
               <Timer />
-              </Box>
-              <Box  justifyContent="flex-end">
               <TaskList user={this.state.user}/>
-              </Box>
-              <Box  justifyContent="flex-start">
-
               <Home2 />
-              </Box>
         </Box>
         </MuiThemeProvider>
         </div>

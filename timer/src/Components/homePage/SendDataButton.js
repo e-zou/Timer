@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './../loginPage/fire.js';
+import Button from '@material-ui/core/Button';
 
 
 export default class SendDataButton extends Component {
@@ -40,7 +41,7 @@ export default class SendDataButton extends Component {
         console.log(this.state.user);
         return (
             <div>
-                <button onClick={this.formatData}>Send Data</button>
+                <Button onClick={this.formatData}>Send Data</Button>
             </div>
         );
     }

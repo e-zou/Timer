@@ -48,7 +48,7 @@ export default class Header extends React.Component {
             <MuiThemeProvider theme={theme}>
             <AppBar position="static">
               <Toolbar>
-                <Typography variant="h4" className={useStyles.title}>
+                <Typography variant="h5" className={useStyles.title}>
                   Tomato Time
                 </Typography> 
                 <Button edge = "start"  component={HomeLink}> <HomeIcon /> Home</Button>

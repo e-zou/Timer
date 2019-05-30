@@ -1,9 +1,20 @@
   .timer {
-      margin-top: 200px;
-    }
-
+    flex-direction: column;
+  }
   .timerTypes {
-    margin-top: 200px;
+    margin-top: 50px;
+    display: flex;
+    /* right: 0;
+    left: 0; */
+    justify-content: center;
+    justify-items: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+  }
+  .MuiButton-outlined {
+    margin-right: 5px !important;
+    margin-left: 5px !important;
   }
   
   .timerCircle {
@@ -11,14 +22,15 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-    height: 200px;
+    height: 450px;
   }
   .countdown-svg {
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
-    height: 200px;
+    height: 450px;
+    width: 450px;
   }
   
   .path2 {
@@ -26,7 +38,7 @@
   }
   .timeDisplay {
     position: relative;
-    height: 200px;
+    height: 450px;
   }
   .timerNumbers {
     margin: 0;
@@ -35,6 +47,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    /* font-family: Arial, Helvetica, sans-serif; */
     font-family: lato;
-    font-size: 30px;
+    font-size: 45px;
   }
