@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import firebase from './../loginPage/fire.js';
 import Button from '@material-ui/core/Button';
-
+import Fab from '@material-ui/core/Fab';
 
 export default class SendDataButton extends Component {
         state = {
-            user: '',
-            sent: false,
+            user: this.props.user,
         }
-        // if user is not null, put in a button with a function that will send in data.
-        // else do nothing
+    
         formatData = (e) => {
             e.preventDefault();
             if (this.props.user != null) { 
@@ -28,22 +26,23 @@ export default class SendDataButton extends Component {
                     user.push(usertasks)
                 }
                 console.log("Made new array");
-
-                // at index checks is true, get data about date, time, and task at that index
-                // put them all in seperate arrays
-    
-                // merge arrays task : {date: , time: }
-                // 
-
             }
         }
     render() {
         console.log(this.state.user);
-        return (
-            <div>
-                <Button onClick={this.formatData}>Send Data</Button>
-            </div>
-        );
+        if (this.state.user != null) { // if there is a user, send data
+            return (
+                <div>
+                    <Button color="primary" variant="outlined" onClick={this.formatData}>Save</Button>
+                </div>
+            );
+        } else {
+            return ( // if there is no user just display data
+                <div>
+                    <Button variant="outlined" title="Login to see all saved tasks">Save</Button>
+                </div>
+            );
+        }
     }
 
 }
