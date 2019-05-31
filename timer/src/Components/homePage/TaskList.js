@@ -95,6 +95,7 @@ export default class TaskList extends React.Component {
             tasks: newTaskList,
             times : newTimes,
             dates: newDates,
+            addtask: "",
         })
     }
     }
