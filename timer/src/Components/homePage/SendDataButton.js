@@ -3,6 +3,7 @@ import firebase from './../loginPage/fire.js';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 
+
 export default class SendDataButton extends Component {
         state = {
             user: this.props.user,
@@ -33,7 +34,7 @@ export default class SendDataButton extends Component {
         if (this.state.user != null) { // if there is a user, send data
             return (
                 <div>
-                    <Button color="primary" variant="outlined" onClick={this.formatData}>Save</Button>
+                    <Button variant="outlined" onClick={this.formatData}>Save</Button>
                 </div>
             );
         } else {

@@ -6,6 +6,7 @@ import HasUserSet from './../loginPage/HasUserSet.js';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from '../theme.js';
 import Box from '@material-ui/core/Box';
+import './Timer.css';
 
 export default class Profile extends React.Component {
 
@@ -18,10 +19,11 @@ export default class Profile extends React.Component {
         return (
         <div>
         <MuiThemeProvider theme={theme}>
-        <Box >
-              <Timer />
-              <TaskList user={this.state.user}/>
-        </Box>
+        <div className="homeDisplay">
+            <div className="emptyMainSection"></div>
+            <Timer />
+            <TaskList user={this.state.user}/>
+        </div>
         </MuiThemeProvider>
         </div>
            

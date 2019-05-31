@@ -1,5 +1,12 @@
   .timer {
     flex-direction: column;
+    width: 40%;
+  }
+  .tasklog {
+    width: 45%;
+  }
+  .emptyMainSection {
+    width: 15%;
   }
   .timerTypes {
     margin-top: 50px;
@@ -15,6 +22,15 @@
   .MuiButton-outlined {
     margin-right: 5px !important;
     margin-left: 5px !important;
+  }
+  
+  .homeDisplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    /* align-content: center; */
   }
   
   .timerCircle {
@@ -36,10 +52,12 @@
   .path2 {
     position: absolute;
   }
+
   .timeDisplay {
     position: relative;
     height: 450px;
   }
+
   .timerNumbers {
     margin: 0;
     padding: 0;
@@ -51,3 +69,5 @@
     font-family: lato;
     font-size: 45px;
   }
+
+ 

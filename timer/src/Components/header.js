@@ -13,6 +13,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from './theme.js';
+import { withTheme } from '@material-ui/styles';
 
 
 
@@ -49,7 +50,7 @@ export default class Header extends React.Component {
             <MuiThemeProvider theme={theme}>
             <AppBar position="static">
               <Toolbar>
-                <Typography variant="h5" className={useStyles.title}>
+                <Typography variant="h5" color="contrast" className={useStyles.title}>
                   Tomato Time
                 </Typography> 
                 <Button edge = "start"  component={HomeLink}> <HomeIcon /> Home</Button>
