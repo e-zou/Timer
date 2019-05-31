@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Home from '../homePage/home.js'
 import Login from './login.js'
 import fire from './fire.js';
+import Profile from '../profilePage/profile.js'
 class SignupPage extends Component{
 
     constructor(props){
@@ -34,8 +35,8 @@ class SignupPage extends Component{
       //If logged in, route back to home page
       return(
         <div className="Routing">
-        
-      {this.state.user ?  (<Home user = {this.state.user}/>): (<Login/>)} {/*//if there is user, render home, otherwise push to login*/}
+        {/* {this.state.user ?  (<Home user = {this.state.user}/>): (<Login/>)} //if there is user, render home, otherwise push to login */}
+        {this.state.user ?  (<Profile/>): (<Login/>)}
         </div>
       )
     }

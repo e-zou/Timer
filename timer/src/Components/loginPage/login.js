@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import fire from './fire';
+import Button from '@material-ui/core/Button';
+import firebase from './../homePage/Timer.css';
+import Input from '@material-ui/core/Input';
+import './index.css'
+
 
 class Login extends Component{
     constructor(props){
@@ -35,12 +40,14 @@ class Login extends Component{
 
     render(){
         return(
-            <div>
+            <div class="login">
                 <form>
-                    <input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" name="email" placeholder="enter email"/>
-                    <input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" name="password" placeholder="enter password"/>
-                    <button onClick={this.login}> Login </button>
-                    <button onClick={this.signup}> Sign up </button>
+                    <Input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" name="email" placeholder="enter email"/> <br/>
+                    <Input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" name="password" placeholder="enter password"/> <br/>
+                    <div class="loginbutton">
+                        <Button onClick={this.login}> Login </Button>
+                        <Button onClick={this.signup}> Sign up </Button>
+                    </div>
                 </form>
              
             </div>

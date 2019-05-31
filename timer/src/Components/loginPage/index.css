@@ -1,0 +1,12 @@
+.login{
+    margin-top:20%;
+    border: 2px #cccccc solid;
+    box-shadow: 10px 10px#ffbcaf;
+    width:300px;
+    padding:30px;
+    margin:auto;
+    margin-top:200px;
+}
+.loginbutton{
+    margin-top:10px;
+}

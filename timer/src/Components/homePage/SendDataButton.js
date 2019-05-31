@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './../loginPage/fire.js';
 import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
 
 
 export default class SendDataButton extends Component {
@@ -34,13 +33,13 @@ export default class SendDataButton extends Component {
         if (this.state.user != null) { // if there is a user, send data
             return (
                 <div>
-                    <Button variant="outlined" onClick={this.formatData}>Save</Button>
+                    <Button onClick={this.props.formatData}>Done</Button>
                 </div>
             );
         } else {
             return ( // if there is no user just display data
                 <div>
-                    <Button variant="outlined" title="Login to see all saved tasks">Save</Button>
+                    <Button title="Login to see all completed tasks">Save</Button>
                 </div>
             );
         }
