@@ -1,6 +1,8 @@
 import React from 'react';
 import SendDataButton from './SendDataButton.js';
 import Button from '@material-ui/core/Button';
+import firebase from './../loginPage/fire.js';
+import Input from '@material-ui/core/Input';
 
 export default class TaskList extends React.Component {
     // dummy values in state that will be passed in from callfirebase.js
@@ -69,6 +71,7 @@ export default class TaskList extends React.Component {
     // onSubmit
     onSubmit = (e) => {
         e.preventDefault();
+        if (e.value != "") {
         // task
         let newTaskList = this.state.tasks
         newTaskList.push(this.state.addtask);
@@ -94,6 +97,7 @@ export default class TaskList extends React.Component {
             dates: newDates,
         })
     }
+    }
 
     // Delete tasks along wiht their date and times
     deleteTask = (index) => {
@@ -114,20 +118,23 @@ export default class TaskList extends React.Component {
     }
 
     // Checks to see if user has been logged in or not
-    // hasUser = (e) => {
-    //     e.preventDefault();
-    //     if (this.state.user != null) { // haven't been logged in
-    //         console.log("there is a user");
-    //     } else { // assumed has been logged in 
+    hasUser = (e) => {
+        e.preventDefault();
+        if (this.state.user != null) { // haven't been logged in
+            console.log("there is a user");
+            return true;
+        } else { // assumed has been logged in 
             
-    //         // at index checks is true, get data about date, time, and task at that index
-    //         // put them all in seperate arrays
+            // at index checks is true, get data about date, time, and task at that index
+            // put them all in seperate arrays
 
-    //         // merge arrays task : {date: , time: }
-    //         // 
-    //         console.log("no one");
-    //     }
-    // }
+            // merge arrays task : {date: , time: }
+            // 
+            console.log("no one");
+            return false;
+        }
+    }
+
 
 
     render () {
@@ -140,42 +147,37 @@ export default class TaskList extends React.Component {
         // console.log(this.state.times1);
 
         return (
-        
-
         <div className="taskLog">
+            <div className="taskLogBox">
             <form onSubmit={this.onSubmit}>
-                <label>Log your task: </label>
-                <input placeholder="task" onSubmit={this.onSubmit} onChange={e => {
+                <Input fullWidth={true} placeholder="Log your task" onSubmit={this.onSubmit} onChange={e => {
                     this.updateField("addtask", e.target.value)
                 }} value={this.state.addtask}/>
-                <Button onClick={this.onSubmit}>Log task</Button>
+                {/* <Button onClick={this.onSubmit}><i class="material-icons">add</i></Button> */}
             </form>
             <table className="taskList">
                 <tbody>
                 {this.state.tasks.map((task, index) => {
                     return(
                     <tr className="taskRow">
-                        <td>{task}</td>
-                        <td><input type="checkbox" key={index} onChange={e => {
-                            // this.updateCheck({index})
-                            this.updateTime({index}) // update specific time in time list
-                            // this.updateDate({index}) // update specific date in date list
-                        }}/></td>
-                        <td><Button key={index} className="deleteTask" onClick={e => {
+                        <td className="taskName">{task}</td>
+                        <td className="taskDelete"><Button key={index} className="deleteTask" onClick={e => {
                             this.deleteTask({index})
                             // this.deleteCheck({index})
-                        }}>X</Button></td>
+                        }}><i class="material-icons">close</i></Button></td>
                     </tr>
                     );
                 })}
                 </tbody>
             </table>
             <SendDataButton
+            onSubmit={this.onSubmit}
             user={this.state.user}
             tasks={this.state.tasks} 
             times={this.state.times} 
             dates={this.state.dates}
             />
+            </div>
         </div>
            
         );
