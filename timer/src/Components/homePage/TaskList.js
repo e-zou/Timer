@@ -15,10 +15,13 @@ export default class TaskList extends React.Component {
         adddate: "",
         addcheck: "",
 
-        // user-facing (organizes data)
+        // admin-facing (organizes data)
         tasks: [], // {task: "", time: "", date: ""}
         times: [],
         dates: [],
+
+        // userfacing
+        tasks1: [], // {task: "", time: "", date: ""}
     }
 
     // Get Date 
@@ -74,7 +77,9 @@ export default class TaskList extends React.Component {
         if (e.value != "") {
         // task
         let newTaskList = this.state.tasks
+        let newTaskList1 = this.state.tasks1
         newTaskList.push(this.state.addtask);
+        newTaskList1.push(this.state.addtask);
         
         // time
         let newTimes = this.state.times
@@ -103,24 +108,52 @@ export default class TaskList extends React.Component {
     // Delete tasks along wiht their date and times
     deleteTask = (index) => {
         let newTaskList = [...this.state.tasks];
+        let newTaskList1 = [...this.state.tasks1];
         let newDateList = [...this.state.dates];
         let newTimeList = [...this.state.times];
 
         let i = index.index
         newTaskList.splice(i, 1);
+        newTaskList1.splice(i, 1);
         newDateList.splice(i, 1);
         newTimeList.splice(i, 1);
 
         this.setState({
             dates : newDateList,
             times : newTimeList,
-            tasks : newTaskList
+            tasks : newTaskList,
+            tasks1 : newTaskList1
         })
+    }
+
+
+    formatData = (e) => {
+        e.preventDefault();
+        if (firebase.auth().currentUser != null) {
+            var userId = firebase.auth().currentUser.uid;
+            this.setState({
+                user: userId
+            })
+            for (let i = 0; i < this.state.times.length ; i++) {
+                const user = firebase.database().ref("users/" + userId);
+
+                let usertasks = {
+                    task: this.state.tasks[i],
+                    date: this.state.dates[i],
+                    time: this.state.times[i],
+                }
+                user.push(usertasks)
+            }
+            console.log("Made new array");
+            this.setState({
+                tasks1 : []
+            })
+        }
+
     }
 
     // Checks to see if user has been logged in or not
     hasUser = (e) => {
-        e.preventDefault();
         if (this.state.user != null) { // haven't been logged in
             console.log("there is a user");
             return true;
@@ -137,7 +170,6 @@ export default class TaskList extends React.Component {
     }
 
 
-
     render () {
         // console.log(this.state.user);
 
@@ -146,7 +178,7 @@ export default class TaskList extends React.Component {
         // console.log(this.state.times);
         // console.log(this.state.checks);
         // console.log(this.state.times1);
-
+        this.hasUser();
         return (
         <div className="taskLog">
             <div className="taskLogBox">
@@ -158,7 +190,7 @@ export default class TaskList extends React.Component {
             </form>
             <table className="taskList">
                 <tbody>
-                {this.state.tasks.map((task, index) => {
+                {this.state.tasks1.map((task, index) => {
                     return(
                     <tr className="taskRow">
                         <td className="taskName">{task}</td>
@@ -171,13 +203,7 @@ export default class TaskList extends React.Component {
                 })}
                 </tbody>
             </table>
-            <SendDataButton
-            onSubmit={this.onSubmit}
-            user={this.state.user}
-            tasks={this.state.tasks} 
-            times={this.state.times} 
-            dates={this.state.dates}
-            />
+            <Button onClick={this.formatData}> Save Completed </Button>       
             </div>
         </div>
            
