@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import fire from '../loginPage/fire'
 import Button from '@material-ui/core/Button';
+import Home from './home.js'
 
 class Logout extends Component{
     constructor(props){
@@ -10,6 +11,7 @@ class Logout extends Component{
 
     logout(){
         fire.auth().signOut();
+        alert("you are logged out")
     }
 
     render(){
