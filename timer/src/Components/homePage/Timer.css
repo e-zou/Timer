@@ -2,17 +2,33 @@
     flex-direction: column;
     width: 40%;
   }
-  .tasklog {
-    width: 45%;
+  .taskLog {
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .taskLogBox {
+    width: 80%;
+    padding: 15px 15px;
+    border: 2px #cccccc solid;
+    box-shadow: 10px 10px#ffbcaf;
+  }
+  .taskList {
+    width: 100%;
+    text-align: left;
+  }
+  .taskName {
+    width: 80%;
+  }
+  .taskDelete {
+    width: 20%;
   }
   .emptyMainSection {
-    width: 15%;
+    width: 30%;
   }
   .timerTypes {
     margin-top: 50px;
     display: flex;
-    /* right: 0;
-    left: 0; */
     justify-content: center;
     justify-items: center;
     flex-direction: row;
@@ -65,8 +81,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    /* font-family: Arial, Helvetica, sans-serif; */
-    font-family: lato;
+    font-family: 'Noto Sans HK', sans-serif;
+    /* font-family: lato; */
     font-size: 45px;
   }
 

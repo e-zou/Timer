@@ -148,20 +148,20 @@ export default class TaskList extends React.Component {
 
         return (
         <div className="taskLog">
+            <div className="taskLogBox">
             <form onSubmit={this.onSubmit}>
-                {/* <label>Log your task: </label> */}
-                <Input placeholder="Log your task" onSubmit={this.onSubmit} onChange={e => {
+                <Input fullWidth={true} placeholder="Log your task" onSubmit={this.onSubmit} onChange={e => {
                     this.updateField("addtask", e.target.value)
                 }} value={this.state.addtask}/>
-                <Button onClick={this.onSubmit}><i class="material-icons">add</i></Button>
+                {/* <Button onClick={this.onSubmit}><i class="material-icons">add</i></Button> */}
             </form>
             <table className="taskList">
                 <tbody>
                 {this.state.tasks.map((task, index) => {
                     return(
                     <tr className="taskRow">
-                        <td>{task}</td>
-                        <td><Button key={index} className="deleteTask" onClick={e => {
+                        <td className="taskName">{task}</td>
+                        <td className="taskDelete"><Button key={index} className="deleteTask" onClick={e => {
                             this.deleteTask({index})
                             // this.deleteCheck({index})
                         }}><i class="material-icons">close</i></Button></td>
@@ -177,6 +177,7 @@ export default class TaskList extends React.Component {
             times={this.state.times} 
             dates={this.state.dates}
             />
+            </div>
         </div>
            
         );
