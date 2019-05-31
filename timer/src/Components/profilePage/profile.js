@@ -42,7 +42,9 @@ export default class Profile extends React.Component {
         return (
         
         <div>
-             <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
+            {this.state.name ? (
+           
                  <Card>
                  <List alignItems="center">
                 <Typography variant = "h5" color = "primary">{this.state.name}'s Profile Page</Typography>
@@ -56,7 +58,8 @@ export default class Profile extends React.Component {
                   ))}
                 </List>
                 </Card>
-              </MuiThemeProvider>
+            ) : <Typography variant = "h5" color = "primary">Log in to view profile data</Typography>}
+            </MuiThemeProvider>
         </div>
            
         );
