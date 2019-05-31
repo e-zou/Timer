@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from "../loginPage/fire.js";
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from '../theme.js';
-import "./profile.css"
+import './profile.css'
 import { Card, List, ListItem, ListItemText, Typography,  Divider } from '@material-ui/core';
 
 export default class Profile extends React.Component {
