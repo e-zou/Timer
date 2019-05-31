@@ -25,8 +25,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 const LoginLink = React.forwardRef((props, ref) => (
     <Link innerRef={ref} to="/login/" {...props} />
   ));
@@ -67,21 +65,3 @@ export default class Header extends React.Component {
     }
 
 }
-
-/*
-<div>
-            <MuiThemeProvider theme={theme}>
-            <AppBar position="static">
-              <div>
-                <Button>
-                  <div>Button 1</div>
-                </Button>
-                <Button>
-                  <div>Button 2</div>
-                </Button>
-              </div>
-            </AppBar>
-          </MuiThemeProvider>
-          </div>
-        </div>
-*/

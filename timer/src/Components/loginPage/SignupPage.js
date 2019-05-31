@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import { Redirect, Route, Router } from "react-router-dom";
 import Home from '../homePage/home.js'
 import Login from './login.js'
 import fire from './fire.js';
-import MainPage from '../mainpage.js';
-
-
 class SignupPage extends Component{
 
     constructor(props){
@@ -32,20 +28,9 @@ class SignupPage extends Component{
         console.log(user)
       })
     }
-
-    /* loggedIn () {
-      return (
-      <div>
-        <Redirect to = '/'/>
-        <MainPage user={this.state.user}/>
-      </div>    
-      )
-    } */
-    
+ 
     render(){
-      console.log("Sign up Page: " + this.state.user)
-
-      // console.log(this.state.user);
+      
       //If logged in, route back to home page
       return(
         <div className="Routing">

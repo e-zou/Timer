@@ -22,5 +22,3 @@ export default class MainPage extends React.Component {
 
 }
 
-/* <Route path="/">Main</Route>
-             <Route path="/profile/">Profile</Route> */
