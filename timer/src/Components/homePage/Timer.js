@@ -1,6 +1,8 @@
 import React, { Components } from 'react';
 import TimerCircle from './TimerCircle.js';
 import './Timer.css';
+import axios from 'axios';
+import CatDisplay from "./catDisplay.js";
 
 import Button from '@material-ui/core/Button';
 
@@ -25,6 +27,8 @@ export default class Timer extends React.Component {
         shortBreakTimer : false,
         longBreakTimer : false,
         workTimer : true,
+
+        picture : "",
     }
 
     formatTime = (seconds) => { // converts into proper minutes and seconds
@@ -54,6 +58,18 @@ export default class Timer extends React.Component {
             this.state.timer = setInterval(this.tick, 1000); // timer is a function used to set variables every 1 second
         }
         console.log("start timer");
+        if ((this.state.shortBreakTimer === true || this.state.longBreakTimer === true) && this.state.workTimer !== true) {
+            axios.get('http://localhost:9000/picture').then(res => {
+           
+            console.log(res.data.file)
+            this.setState({picture : res.data.file})
+           
+            });
+        }
+        else if (this.state.workTimer === true) {
+            this.setState({picture : ""})
+        }
+
     }
 
     stopTimer = (e) => { // stops timer
@@ -75,8 +91,9 @@ export default class Timer extends React.Component {
                 minutes : 25,
                 seconds : 0,
                 minDisplay : '25',
-                secDisplay : '00'
+                secDisplay : '00',
             });
+           
         }
         if (this.state.shortBreakTimer == true) { // 5 min break timer
             this.setState({
@@ -88,6 +105,7 @@ export default class Timer extends React.Component {
                 minDisplay : '05',
                 secDisplay : '00',
             })
+            
         }
         if (this.state.longBreakTimer == true) { // 10 min break timer
             this.setState({
@@ -99,6 +117,7 @@ export default class Timer extends React.Component {
                 minDisplay : '10',
                 secDisplay : '00',
             })
+        
         }
     }
 
@@ -189,6 +208,10 @@ export default class Timer extends React.Component {
                 <Button onClick={this.startTimer}><i class="material-icons">play_arrow</i></Button>
                 <Button onClick={this.stopTimer}><i class="material-icons">stop</i></Button>
                 <Button onClick={this.resetTimer}><i class="material-icons">replay</i></Button>
+            </div>
+            
+            <div>
+                <CatDisplay picture = {this.state.picture}/>
             </div>
 
           </div>
