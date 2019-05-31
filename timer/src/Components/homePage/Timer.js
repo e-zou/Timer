@@ -2,7 +2,7 @@ import React, { Components } from 'react';
 import TimerCircle from './TimerCircle.js';
 import './Timer.css';
 import axios from 'axios';
-import CatDisplay from "./catDisplay.js";
+import CatDisplay from "./catDisplay.js/index.js.js";
 
 import Button from '@material-ui/core/Button';
 
