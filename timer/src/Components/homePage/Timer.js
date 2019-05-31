@@ -59,7 +59,7 @@ export default class Timer extends React.Component {
         }
         console.log("start timer");
         if ((this.state.shortBreakTimer === true || this.state.longBreakTimer === true) && this.state.workTimer !== true) {
-            axios.get('http://localhost:9000/picture').then(res => {
+            axios.get('https://tomato-time-launch.herokuapp.com/picture').then(res => {
            
             console.log(res.data.file)
             this.setState({picture : res.data.file})
