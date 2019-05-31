@@ -9,7 +9,7 @@ var app = express();
 // Then use it before your routes are set up:
 app.use(cors());
 
-const port = 9000
+const port = process.env.PORT || 9000
 
 //thank you to https://aws.random.cat/meow for providing our application with awesome cat photos
 
