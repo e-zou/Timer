@@ -6,6 +6,7 @@
 * React
 * Javascript
 * Firebase
+* Material UI
 
 # Collaborators
 * Matthew Foreman (mforeman19)
